@@ -1,6 +1,7 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 
 module.exports = (sequelize) => {
+  
   const Task = sequelize.define('Task', {
     id:{
       type: DataTypes.UUID,
