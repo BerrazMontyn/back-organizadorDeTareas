@@ -9,6 +9,9 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/odt`, {
   logging: false,
   native: false,
+  dialectOptions: {
+    useUTC: false,
+  },
 });
 
 const basename = path.basename(__filename);
