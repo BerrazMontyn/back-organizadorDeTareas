@@ -1,8 +1,6 @@
 const { Router } = require("express");
 const { Expense } = require("../db");
 
-
-
 const router = Router();
 
 router.post("/", async (req, res) => {
