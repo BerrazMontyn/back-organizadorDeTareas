@@ -1,8 +1,6 @@
 const { Router } = require("express");
 const { Expense } = require("../db");
 
-
-
 const router = Router();
 
 router.post("/", async (req, res) => {
@@ -78,6 +76,18 @@ router.put("/:id", async (req, res) => {
       return res.send(change);
     } catch (error) {
       console.log("Error en ruta put expense");
+    }
+  });
+
+  router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Expense.destroy({
+        where: { id },
+      });
+      res.send("Borrado exitosamente");
+    } catch (error) {
+      console.log("Error en ruta delete expenses");
     }
   });
 
