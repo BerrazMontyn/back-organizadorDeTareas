@@ -1,8 +1,7 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 
 module.exports = (sequelize) => {
-  
-  const Expense = sequelize.define('Expense', {
+    const Expense = sequelize.define('Expense', {
     id:{
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
@@ -15,6 +14,7 @@ module.exports = (sequelize) => {
     },
     amount: {
       type: DataTypes.FLOAT,
+      allowNull: false,
     },
   });
 
