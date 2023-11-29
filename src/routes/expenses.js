@@ -81,5 +81,17 @@ router.put("/:id", async (req, res) => {
     }
   });
 
+  router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Expense.destroy({
+        where: { id },
+      });
+      res.send("Borrado exitosamente");
+    } catch (error) {
+      console.log("Error en ruta delete expenses");
+    }
+  });
+
 
 module.exports = router;
