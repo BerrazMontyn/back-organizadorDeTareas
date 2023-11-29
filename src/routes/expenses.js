@@ -23,55 +23,63 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const expenses = await Expense.findAll(); 
+        const expenses = await Expense.findAll();
 
-        if (!expenses || expenses.length === 0) {
-            return res.status(404).json({
+        return (expenses && expenses.length)
+            ? res.status(200).json({
+                ok: true,
+                msg: 'Lista de gastos',
+                expenses,
+            })
+            : res.status(404).json({
                 ok: false,
                 msg: 'No se encontraron gastos',
             });
-        }
-
-        res.status(200).json({
-            ok: true,
-            msg: 'Lista de gastos',
-            expenses,
-        });
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             ok: false,
-            msg: 'Error en get expenses',
+            msg: 'Error al obtener los gastos',
         });
     }
 });
 
-router.get("/:id", async (req, res) => {
 
-    const { id } = req.params;
+router.get("/:id", async (req, res) => {
     try {
+        const { id } = req.params;
         const expense = await Expense.findByPk(id);
 
         if (!expense) {
             return res.status(404).json({
                 ok: false,
-                msg: "No se encontró el gasto",
+                msg: "Gasto no encontrado",
             });
         }
-
-        res.status(200).json({
+        return res.status(200).json({
             ok: true,
             msg: "Gasto encontrado",
             expense,
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
+        console.error(error);
+        return res.status(500).json({
             ok: false,
-            msg: "No se encontro el gasto indicado",
+            msg: "Error en la búsqueda del gasto",
         });
     }
 });
+
+router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const datos = req.body;
+    try {
+      let change = await Expense.update(datos, { where: { id } });
+      return res.send(change);
+    } catch (error) {
+      console.log("Error en ruta put expense");
+    }
+  });
 
 
 module.exports = router;
