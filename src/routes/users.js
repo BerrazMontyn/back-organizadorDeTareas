@@ -92,5 +92,16 @@ router.get("/", async (req, res) => {
       console.log("Error en ruta put users");
     }
   });
-  
+
+  router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      await User.destroy({
+        where: { id },
+      });
+      res.send("Borrado exitosamente");
+    } catch (error) {
+      console.log("Error en ruta delete users");
+    }
+  });
 module.exports = router;
