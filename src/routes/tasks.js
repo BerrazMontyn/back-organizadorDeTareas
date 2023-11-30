@@ -38,4 +38,56 @@ router.post("/", async (req, res) => {
   }
 });
 
+//------------------------------------------------------------
+//Ruta por id:
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const task = await Task.findByPk(id);
+
+    if (!task) {
+      return res.status(404).json({ error: "No hay tarea disponible" });
+    }
+    return res.status(200).json({ msg: "Gasto encontrado", task });
+  } catch (error) {
+    console.log("Estoy rompiendo en GETFORID", error);
+  }
+});
+
+//------------------------------------------------------------
+//Ruta Put
+
+router.put("/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    let edit = req.body;
+
+    if (id) {
+      let data = await Task.update(edit, { where: { id } });
+      return res.status(200).send("Tarea editada con exito");
+    } else {
+      return res.status(400).send("No se pudo editar la Tarea");
+    }
+  } catch (error) {
+    console.log("EL error esta en RutaPUT", error);
+  }
+});
+
+//---------------------------------------------------------------------
+//Ruta Delete
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Task.destroy({
+      where: { id },
+    });
+    res.send("Borrado exitosamente");
+  } catch (error) {
+    console.log("Estoy rompiendo en RouterDelete", error);
+  }
+});
+
 module.exports = router;
