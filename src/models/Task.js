@@ -1,9 +1,8 @@
-const { DataTypes, UUIDV4 } = require('sequelize');
+const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
-  
-  const Task = sequelize.define('Task', {
-    id:{
+  const Task = sequelize.define("Task", {
+    id: {
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
       allowNull: false,
@@ -17,10 +16,12 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
     time: {
-      type: DataTypes.TIME,
+      type: DataTypes.TIME, // Solo la hora
+      allowNull: false,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY, // Solo la fecha
+      allowNull: false,
     },
   });
 
