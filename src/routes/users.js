@@ -56,6 +56,41 @@ router.get("/", async (req, res) => {
       });
     }
   });
-  
 
+  router.get("/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const users = await User.findByPk(id);
+  
+      if (!users) {
+        return res.status(404).json({
+          ok: false,
+          msg: "Usuario no encontrado",
+        });
+      }
+      return res.status(200).json({
+        ok: true,
+        msg: "Usuario encontrado",
+        users,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        ok: false,
+        msg: "Error en la búsqueda del usuario",
+      });
+    }
+  });
+
+  router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const datos = req.body;
+    try {
+      let change = await User.update(datos, { where: { id } });
+      return res.send(change);
+    } catch (error) {
+      console.log("Error en ruta put users");
+    }
+  });
+  
 module.exports = router;
