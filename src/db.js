@@ -46,7 +46,7 @@ const User = require("./models/User")(sequelize);
 const Task = require("./models/Task")(sequelize);
 const Expense = require("./models/Expense")(sequelize);
 const Savings = require("./models/Savings")(sequelize); //Ahorros
-const Wishes = require("./models/Wishes")(sequelize); // Deseos
+const Desire = require("./models/Desire")(sequelize); // Deseos
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -57,7 +57,7 @@ User.belongsToMany(Expense, { through: "User-expense" });
 Expense.belongsToMany(User, { through: "User-expense" });
 
 User.hasOne(Savings);
-User.hasOne(Wishes);
+User.hasOne(Desire);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
