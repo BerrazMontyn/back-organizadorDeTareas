@@ -45,8 +45,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const User = require("./models/User")(sequelize);
 const Task = require("./models/Task")(sequelize);
 const Expense = require("./models/Expense")(sequelize);
-const Savings = require("./models/Savings")(sequelize); //Ahorros
-const Desire = require("./models/Desire")(sequelize); // Deseos
+const Saving = require("./models/Saving")(sequelize);
+const Desire = require("./models/Desire")(sequelize); 
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -56,7 +56,7 @@ Task.belongsToMany(User, { through: "User-task" });
 User.belongsToMany(Expense, { through: "User-expense" });
 Expense.belongsToMany(User, { through: "User-expense" });
 
-User.hasOne(Savings);
+User.hasOne(Saving);
 User.hasOne(Desire);
 
 module.exports = {

@@ -35,6 +35,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    income: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
   return User;
