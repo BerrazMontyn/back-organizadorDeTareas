@@ -1,7 +1,13 @@
 const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const Savings = sequelize.define("Savings", {
+  const Saving = sequelize.define("Saving", {
+    id:{
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,5 +19,5 @@ module.exports = (sequelize) => {
     },
   });
 
-  return Savings;
+  return Saving;
 };

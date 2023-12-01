@@ -4,9 +4,9 @@ const { User } = require('../db');
 
 
 router.post("/", async (req, res) => {
-    const { firstName, lastName, email, password, birthday, image } = req.body;
+    const { firstName, lastName, email, password, birthday, image, income } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !birthday) {
+    if (!firstName || !lastName || !email || !password || !birthday || !income) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
     }
 
@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
             password,
             birthday,
             image,
+            income,
         });
 
         return res.status(201).send(newUser);
